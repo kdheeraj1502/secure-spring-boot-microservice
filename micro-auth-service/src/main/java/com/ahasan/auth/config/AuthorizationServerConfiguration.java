@@ -3,6 +3,7 @@ package com.ahasan.auth.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -37,14 +38,21 @@ public class AuthorizationServerConfiguration implements AuthorizationServerConf
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.checkTokenAccess("isAuthenticated()").tokenKeyAccess("permitAll()");
+ //   	security.aut
+  //  	security.and().antMatchers(HttpMethod.POST, "/api/auth/**").permitAll();
+    	System.out.println("=============== I am here ===============");
+    	for(int i = 0; i < 100; i++) {
+    		System.out.println(i + " ===================================");
+    	}
+    //	security.tokenKeyAccess("permitAll()");
+
+       security.checkTokenAccess("isAuthenticated()").tokenKeyAccess("permitAll()");
 
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.jdbc(dataSource).passwordEncoder(passwordEncoder);
-
     }
 
     @Override
